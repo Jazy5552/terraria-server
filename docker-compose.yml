@@ -1,0 +1,20 @@
+version: "3"
+services:
+
+  terraria:
+    image: jazy5552/terraria-server
+    deploy:
+      restart_policy:
+        delay: 10m
+        max_attempts: 10
+    labels:
+      jazy.terraria-server.description: "Jazys Personal Terraria Server"
+      jazy.terraria-server.name: "Jazys Terraria Server"
+    ports:
+      - "7777:7777"
+    volumes:
+      - "terraria-data:/terraria"
+
+volumes:
+  terraria-data:
+
