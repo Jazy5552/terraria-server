@@ -13,4 +13,4 @@ EXPOSE 7777
 
 # Assumes that a world was previously made
 # Otherwise you must create one manually in this volume
-CMD ["mono", "/terraria/TerrariaServer.exe", "-worldpath", "/terraria/worlds", "-world", "/terraria/worlds/*.wld"]
+CMD ["/bin/sh", "-c", "mono /terraria/TerrariaServer.exe -worldpath /terraria/worlds -world /terraria/worlds/*.wld"]
