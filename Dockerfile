@@ -8,9 +8,23 @@ RUN set -x \
   && unzip ./* \
   && rm tshock*.zip
 
+# The start script only works when workdir is terraria for some reason...
+WORKDIR /terraria
+# Following nonsense is because of the way TerrariaServer.exe starts up...
+RUN echo " \
+  { sleep 10; echo '1'; \
+  sleep 3; echo -e '\n'; \
+  sleep 3; echo -e '\n'; \
+  sleep 3; echo -e '\n'; \
+  sleep 3; echo -e '\n'; \
+  } \
+  | mono /terraria/TerrariaServer.exe -worldpath /terraria/worlds" \
+  > /start-terraria-server.sh
+
 VOLUME /terraria
 EXPOSE 7777
 
 # Assumes that a world was previously made
 # Otherwise you must create one manually in this volume
-CMD ["/bin/sh", "-c", "mono /terraria/TerrariaServer.exe -worldpath /terraria/worlds -world /terraria/worlds/*.wld"]
+CMD ["/bin/sh", "/start-terraria-server.sh"]
+
