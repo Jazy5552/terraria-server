@@ -10,10 +10,15 @@ services:
     labels:
       jazy.terraria-server.description: "Jazys Personal Terraria Server"
       jazy.terraria-server.name: "Jazys Terraria Server"
-    ports:
-      - "7777:7777"
+    networks:
+      - terraria
     volumes:
       - "terraria-data:/terraria"
+
+networks:
+  terraria:
+    external:
+      name: "host"
 
 volumes:
   terraria-data:
