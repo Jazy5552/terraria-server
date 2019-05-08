@@ -15,6 +15,25 @@ services:
     volumes:
       - "terraria-data:/terraria"
 
+  backuper:
+    deploy:
+      restart_policy:
+        delay: 10m
+        max_attempts: 10
+    environment:
+      - CONTINOUS_BACKUP=true
+      - BACKUP_PREFIX=terraria-
+      - BACKUP_CRON_TIME=0 8 */3 * *
+      - BACKUP_INPUT_DIR=/backup-input
+      - BACKUP_OUTPUT_DIR=/backup-output
+      - STALE_BACKUP_TIME=30
+    image: jazy5552/backuper
+    labels:
+      jazy.terraria.backuper.description: "Container to create backups for terraria"
+    volumes:
+      - "terraria-data:/backup-input:ro"
+      - "/home/jazy/terraria-server/backups:/backup-output"
+
 networks:
   terraria:
     external:
