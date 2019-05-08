@@ -6,7 +6,11 @@ RUN set -x \
   && cd /terraria \
   && wget -q "https://github.com/Pryaxis/TShock/releases/download/v4.3.26/tshock_4.3.26.zip" \
   && unzip ./* \
-  && rm tshock*.zip
+  && rm tshock*.zip \
+  && mkdir -p /terraria/tshock
+
+COPY config.json /terraria/tshock
+COPY sscconfig.json /terraria/tshock
 
 # The start script only works when workdir is terraria for some reason...
 WORKDIR /terraria
