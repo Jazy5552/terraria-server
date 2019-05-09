@@ -7,6 +7,8 @@ services:
       restart_policy:
         delay: 10m
         max_attempts: 10
+    environment:
+      - DEFAULT_WORLD=1
     labels:
       jazy.terraria-server.description: "Jazys Personal Terraria Server"
       jazy.terraria-server.name: "Jazys Terraria Server"
