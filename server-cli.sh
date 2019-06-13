@@ -13,5 +13,5 @@
 
 container_id="$1"
 shift
-docker exec $container_id screen -S terraria -X stuff $@^M
+docker exec $container_id screen -S terraria -X stuff "$*^M"
 
